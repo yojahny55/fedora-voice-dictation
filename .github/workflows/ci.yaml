@@ -34,7 +34,7 @@ jobs:
             python3-dbus \
             xvfb \
             libwayland-dev \
-            libwayland-protocols-dev
+            wayland-protocols
 
       - name: Install Python dependencies
         run: |

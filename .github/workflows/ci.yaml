@@ -33,6 +33,7 @@ jobs:
             python3-pyqt5 \
             python3-dbus \
             libdbus-1-dev \
+            libglib2.0-dev \
             xvfb \
             libwayland-dev \
             wayland-protocols

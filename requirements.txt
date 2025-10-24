@@ -1,0 +1,27 @@
+# Core Application - UI & Event Loop
+PyQt5==5.15.9  # Omit if using system python3-qt5
+PyQt5-sip==12.12.2  # Required by PyQt5
+
+# Audio Processing
+sounddevice==0.4.6
+numpy==1.24.3  # sounddevice + audio preprocessing dependency
+
+# Speech Recognition & ML
+# NOTE: torch installed separately (see README for CUDA-specific installation)
+# torch==2.0.1+cu121  # CUDA 12.x - install via: pip install torch==2.0.1+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+# torch==2.0.1+cu118  # CUDA 11.8 - install via: pip install torch==2.0.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+openai-whisper==20231117  # Exact version (date-based)
+tiktoken==0.5.1  # openai-whisper dependency (Rust compilation)
+numba==0.58.0  # openai-whisper dependency (LLVM, large package)
+
+# Voice Activity Detection
+silero-vad==4.0.1
+
+# Wayland Integration
+pywayland==0.4.14  # Omit if using system python3-pywayland
+pyperclip==1.8.2  # Clipboard fallback
+
+# D-Bus Integration
+dbus-python==1.3.2  # Omit if using system python3-dbus
+
+# No dependencies needed for: json, logging (stdlib)

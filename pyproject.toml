@@ -1,0 +1,130 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fedora-voice-dictation"
+version = "0.1.0-dev"
+description = "Offline, low-latency voice-to-text dictation for Fedora Linux with Wayland support"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "TBD"}
+authors = [
+    {name = "Fedora Voice Dictation Team"},
+]
+keywords = ["speech-recognition", "dictation", "whisper", "wayland", "fedora", "voice-to-text"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+
+dependencies = [
+    "PyQt5>=5.15.9",
+    "PyQt5-sip>=12.12.2",
+    "sounddevice>=0.4.6",
+    "numpy>=1.24.3",
+    "openai-whisper==20231117",
+    "tiktoken>=0.5.1",
+    "numba>=0.58.0",
+    "silero-vad>=4.0.1",
+    "pywayland>=0.4.14",
+    "pyperclip>=1.8.2",
+    "dbus-python>=1.3.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.2",
+    "pytest-qt>=4.2.0",
+    "pytest-mock>=3.11.1",
+    "pytest-cov>=4.1.0",
+    "mypy>=1.5.1",
+    "ruff>=0.0.285",
+    "black>=23.7.0",
+    "ipython>=8.14.0",
+]
+
+[project.scripts]
+fedora-voice-dictation = "src.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # Exclude vendored dependencies
+  | vendor
+  # Exclude virtual environments
+  | venv
+  | .venv
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (import sorting)
+    "N",   # pep8-naming
+    "UP",  # pyupgrade (modern Python syntax)
+    "B",   # flake8-bugbear (common bugs)
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+    "RET", # flake8-return
+]
+ignore = [
+    "E501",  # Line too long (handled by black)
+    "B008",  # Do not perform function calls in argument defaults (needed for Qt signals)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]  # Allow assert in tests
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = [
+    "sounddevice",
+    "silero_vad",
+    "openai_whisper",
+    "whisper",
+    "pywayland",
+    "dbus",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--strict-markers --cov=src --cov-report=term-missing"

@@ -1,0 +1,15 @@
+# Testing
+pytest==7.4.2
+pytest-qt==4.2.0  # PyQt5 testing
+pytest-mock==3.11.1  # Mocking
+pytest-cov==4.1.0  # Coverage reporting
+
+# Type Checking & Linting
+mypy==1.5.1  # Static type checking (strict mode in CI/CD)
+ruff==0.0.285  # Fast linter (replaces flake8, isort)
+
+# Code Formatting
+black==23.7.0  # Automatic formatting (enforced in CI/CD)
+
+# Development Tools
+ipython==8.14.0  # Interactive debugging

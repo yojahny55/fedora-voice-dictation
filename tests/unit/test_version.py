@@ -7,8 +7,6 @@ command-line version reporting via `python -m src --version`.
 import subprocess
 import sys
 
-import pytest
-
 from src import __version__
 
 

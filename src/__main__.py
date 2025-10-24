@@ -32,7 +32,7 @@ def main() -> int:
     )
 
     # Parse arguments
-    args = parser.parse_args()
+    parser.parse_args()
 
     # If we get here, no arguments were provided
     print(f"Fedora Voice Dictation v{__version__}")
